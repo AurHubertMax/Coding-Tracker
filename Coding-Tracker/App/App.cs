@@ -71,7 +71,7 @@ public class App
 
         DateTime end_time = start_time.AddHours(random.Next(1, 4));
 
-        TimeSpan duration = end_time - start_time;
+        string duration = (end_time - start_time).ToString();
 
         string notes = $"Random notes {random.Next(0, 100)}";
 

@@ -31,8 +31,8 @@ internal class LiveTracker
     public static CodingSession SaveSession()
     {
         var session = new CodingSession();
-        session.Duration = stopwatch.Elapsed;
-        session.StartTime = DateTime.Now - session.Duration;
+        session.Duration = stopwatch.Elapsed.ToString();
+        session.StartTime = DateTime.Now - session.GetDuration();
         session.EndTime = DateTime.Now;
 
         return session;

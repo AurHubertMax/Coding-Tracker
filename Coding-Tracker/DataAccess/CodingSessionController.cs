@@ -21,12 +21,12 @@ namespace Coding_Tracker.DataAccess
             }
         }
 
-        public IEnumerable<CodingSession> GetCodingSessions()
+        public List<CodingSession> GetCodingSessions()
         {
             string query = "SELECT * FROM CodingSessions";
             using (var connection = _dbManager.GetConnection())
             {
-                var sessions = connection.Query<CodingSession>(query);
+                var sessions = connection.Query<CodingSession>(query).ToList();
                 return sessions;
             }
         }

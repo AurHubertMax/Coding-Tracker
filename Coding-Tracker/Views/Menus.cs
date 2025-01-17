@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Coding_Tracker.DataAccess;
+using Coding_Tracker.Engine;
 using Spectre.Console;
 
 namespace Coding_Tracker.Views
 {
     internal class Menus
     {
+        private static CodingSessionController cs_controller = new();
+
+        private static List<CodingSession> sessions = new();
+
+        
         public static void DisplayMainMenu()
         {
             Console.Clear();
@@ -50,8 +56,7 @@ namespace Coding_Tracker.Views
                 DisplaySessionSummary(session);
                 if (Console.ReadLine().ToUpper() == "Y")
                 {
-                    CodingSessionController CSController = new();
-                    CSController.AddCodingSession(session);
+                    cs_controller.AddCodingSession(session);
                     Console.WriteLine("Session saved successfully! Press ENTER to go back to main menu");
                     Console.ReadLine();
                 }
@@ -78,7 +83,10 @@ namespace Coding_Tracker.Views
 
         internal static void ViewCodingSessions()
         {
-            throw new NotImplementedException();
+            sessions = cs_controller.GetCodingSessions();
+            var table = Middleware.GetTable(sessions);
+            AnsiConsole.Write(table);
+            Console.ReadLine();
         }
     }
 }
